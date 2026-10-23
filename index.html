@@ -1,475 +1,346 @@
-
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090711">
-<meta name="description" content="Denova Social Media Services — သင့်ရဲ့ social media တိုးတက်မှုအတွက် လွယ်ကူရိုးရှင်းသော ဝန်ဆောင်မှုများ။">
-<title>Denova | Social Media Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DENOVA - Social Media Services</title>
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --accent-blue: #2563eb;
+            --border-color: #e2e8f0;
+        }
 
-<style>
-:root {
-  --bg:#090711;
-  --card:#141020;
-  --purple:#a855f7;
-  --light:#d8b4fe;
-  --white:#f8f7fc;
-  --muted:#a7a0b8;
-  --border:#30213f;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--bg);color:var(--white);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  line-height:1.7;
-}
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-button,a{ -webkit-tap-highlight-color:transparent }
-.container{width:min(1080px,92%);margin:auto}
-header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(9,7,17,.94);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(14px);
-}
-.nav{
-  min-height:68px;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;
-}
-.logo{font-size:22px;font-weight:900;letter-spacing:1px}
-.logo span,.accent{color:var(--light)}
-nav{display:flex;gap:18px;font-size:13px;color:var(--muted)}
-nav a:hover{color:white}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:8px;padding:12px 18px;border:1px solid var(--border);
-  border-radius:12px;color:white;background:var(--card);
-  font-weight:700;cursor:pointer;transition:.2s;
-}
-.btn-primary{
-  background:linear-gradient(120deg,#7e22ce,#a855f7);
-  border-color:transparent;box-shadow:0 8px 28px #9333ea25;
-}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
-.hero{
-  padding:82px 0 60px;text-align:center;
-  background:radial-gradient(ellipse at 50% 0%,#6126a32e,transparent 65%);
-}
-.eyebrow{
-  display:inline-block;border:1px solid var(--border);
-  padding:5px 13px;border-radius:30px;color:var(--light);
-  font-size:12px;letter-spacing:1px;
-}
-h1{font-size:clamp(35px,7vw,65px);line-height:1.2;
-  letter-spacing:-1.8px;margin:23px 0}
-.hero p{color:var(--muted);max-width:620px;margin:0 auto 25px}
-.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.trust{margin-top:30px;color:var(--muted);font-size:12px}
-section{padding:54px 0}
-.section-head{text-align:center;margin-bottom:30px}
-.section-head h2{font-size:29px;margin:0 0 8px}
-.section-head p{color:var(--muted);margin:0}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{
-  padding:23px;background:linear-gradient(145deg,#171126,#100d19);
-  border:1px solid var(--border);border-radius:18px;
-}
-.card:hover{border-color:#8752bb}
-.symbol{
-  width:47px;height:47px;display:grid;place-items:center;
-  border-radius:14px;background:#9b5de51a;font-size:23px;
-  margin-bottom:14px;
-}
-.card h3{margin:0 0 8px;font-size:18px}
-.card p{color:var(--muted);font-size:13px;margin:0 0 17px}
-.card .btn{width:100%;font-size:13px}
-.badge{
-  display:inline-block;color:var(--light);font-size:11px;
-  border:1px solid var(--border);padding:3px 9px;
-  border-radius:20px;margin-bottom:10px;
-}
-.search-row{
-  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;
-}
-input,select,textarea{
-  width:100%;padding:13px;background:#0c0914;
-  color:white;border:1px solid var(--border);
-  border-radius:11px;outline:none;
-}
-input:focus,select:focus,textarea:focus{border-color:var(--purple)}
-.search-row input{flex:1;min-width:170px}
-.search-row select{width:auto;min-width:145px}
-.empty{display:none;color:var(--muted);text-align:center;padding:25px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.step{text-align:center;padding:18px}
-.number{
-  display:grid;place-items:center;margin:0 auto 12px;
-  width:42px;height:42px;border-radius:50%;
-  background:#8b5cf626;color:var(--light);font-weight:900;
-}
-.step p{font-size:13px;color:var(--muted)}
-.order-wrap{
-  max-width:650px;margin:auto;padding:25px;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:20px;
-}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.field{margin-bottom:15px}
-.field label{display:block;font-size:13px;margin-bottom:7px}
-.summary{
-  border:1px solid var(--border);border-radius:13px;
-  padding:15px;margin:18px 0;background:#0c0914;
-}
-.summary div{display:flex;justify-content:space-between;gap:10px}
-.summary small{color:var(--muted)}
-.note{color:var(--muted);font-size:12px}
-.full{width:100%}
-.faq{max-width:720px;margin:auto}
-details{border-bottom:1px solid var(--border);padding:16px 0}
-summary{cursor:pointer;font-weight:700}
-details p{color:var(--muted);font-size:14px}
-footer{border-top:1px solid var(--border);padding:30px 0;color:var(--muted);font-size:12px}
-.footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-@media(max-width:700px){
-  nav{gap:10px;font-size:11px}
-  .nav .btn{padding:8px 10px;font-size:11px}
-  .grid{grid-template-columns:1fr}
-  .hero{padding:58px 0 42px}
-  .steps{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  section{padding:40px 0}
-}
-@media(max-width:360px){nav a:nth-child(2){display:none}}
-</style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        /* User & Balance Cards */
+        .info-card {
+            background-color: var(--card-bg);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card .icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .info-card .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .info-card .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        /* Platform Grid Buttons (Like SocialBoostMm) */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .platform-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .platform-btn:hover, .platform-btn.active {
+            border-color: var(--accent-blue);
+            background-color: #eff6ff;
+        }
+
+        /* Order Form Box */
+        .form-box {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            background-color: #f8fafc;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent-blue);
+            background-color: #fff;
+        }
+
+        /* Service Description Box */
+        .service-desc {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--accent-blue);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .charge-box {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            background: #eff6ff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
 </head>
-
 <body>
-<header>
-  <div class="container nav">
-    <a class="logo" href="#home">DENO<span>VA.</span></a>
-    <nav aria-label="Main navigation">
-      <a href="#services">Services</a>
-      <a href="#how">How it works</a>
-      <a href="#order">Order</a>
-    </nav>
-    <a class="btn btn-primary" href="#order">Get Started ↗</a>
-  </div>
-</header>
 
-<main>
-<section class="hero" id="home">
-  <div class="container">
-    <span class="eyebrow">SOCIAL MEDIA SERVICES</span>
-    <h1>Grow Your Socials.<br><span class="accent">Build Your Presence.</span></h1>
-    <p>
-      မင်းရဲ့ social media ကို ပိုမိုစနစ်တကျ တိုးတက်လာဖို့
-      လွယ်ကူရိုးရှင်းတဲ့ ဝန်ဆောင်မှုတွေနဲ့အတူ
-      နောက်တစ်ဆင့်ကို စတင်လိုက်ပါ။
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#services">Explore Services ↗</a>
-      <a class="btn" href="#how">How It Works</a>
-    </div>
-    <div class="trust">
-      SIMPLE PROCESS · CLEAR PRICING · CUSTOMER SUPPORT
-    </div>
-  </div>
-</section>
+<div class="main-container">
+    <div class="header">DENOVA SERVICES</div>
 
-<section id="services">
-  <div class="container">
-    <div class="section-head">
-      <h2>Explore Our <span class="accent">Services</span></h2>
-      <p>မင်းလိုအပ်တဲ့ Platform နဲ့ Service ကို ရွေးချယ်လိုက်ပါ။</p>
-    </div>
-
-    <div class="search-row">
-      <input id="search" type="search" placeholder="Search services..." aria-label="Search services">
-      <select id="platform" aria-label="Filter by platform">
-        <option value="all">All Platforms</option>
-        <option value="TikTok">TikTok</option>
-        <option value="Facebook">Facebook</option>
-        <option value="Instagram">Instagram</option>
-        <option value="YouTube">YouTube</option>
-      </select>
-    </div>
-
-    <div class="grid" id="serviceGrid">
-      <article class="card" data-platform="TikTok">
-        <div class="symbol">♪</div>
-        <span class="badge">SHORT-FORM VIDEO</span>
-        <h3>TikTok Services</h3>
-        <p>Followers၊ Likes၊ Views နှင့် အခြားရရှိနိုင်သော ဝန်ဆောင်မှုများကို စုံစမ်းနိုင်ပါတယ်။</p>
-        <button class="btn choose" data-service="TikTok Services">Choose Service ↗</button>
-      </article>
-
-      <article class="card" data-platform="Facebook">
-        <div class="symbol">f</div>
-        <span class="badge">SOCIAL NETWORK</span>
-        <h3>Facebook Services</h3>
-        <p>Page နဲ့ Post ဆိုင်ရာ ဝန်ဆောင်မှုများ၊ ရရှိနိုင်မှုနဲ့ ဈေးနှုန်းကို မေးမြန်းနိုင်ပါတယ်။</p>
-        <button class="btn choose" data-service="Facebook Services">Choose Service ↗</button>
-      </article>
-
-      <article class="card" data-platform="Instagram">
-        <div class="symbol">◎</div>
-        <span class="badge">VISUAL CONTENT</span>
-        <h3>Instagram Services</h3>
-        <p>Followers၊ Likes နှင့် အခြားသက်ဆိုင်ရာ ဝန်ဆောင်မှုများကို စုံစမ်းနိုင်ပါတယ်။</p>
-        <button class="btn choose" data-service="Instagram Services">Choose Service ↗</button>
-      </article>
-
-      <article class="card" data-platform="YouTube">
-        <div class="symbol">▶</div>
-        <span class="badge">VIDEO PLATFORM</span>
-        <h3>YouTube Services</h3>
-        <p>Views၊ Subscribers နဲ့ အခြားဝန်ဆောင်မှုများရဲ့ အခြေအနေကို မေးမြန်းနိုင်ပါတယ်။</p>
-        <button class="btn choose" data-service="YouTube Services">Choose Service ↗</button>
-      </article>
-
-      <article class="card" data-platform="TikTok">
-        <div class="symbol">↗</div>
-        <span class="badge">CONTENT GROWTH</span>
-        <h3>Video Engagement</h3>
-        <p>သင့် Content အတွက် သင့်လျော်သော ရွေးချယ်စရာများကို လေ့လာကြည့်ပါ။</p>
-        <button class="btn choose" data-service="Video Engagement">Choose Service ↗</button>
-      </article>
-
-      <article class="card" data-platform="Other">
-        <div class="symbol">✦</div>
-        <span class="badge">CUSTOM REQUEST</span>
-        <h3>Custom Service</h3>
-        <p>စာရင်းထဲမှာ မတွေ့ရတဲ့ ဝန်ဆောင်မှုအတွက် ကျွန်ုပ်တို့ကို ဆက်သွယ်မေးမြန်းပါ။</p>
-        <button class="btn choose" data-service="Custom Service">Choose Service ↗</button>
-      </article>
-    </div>
-    <p class="empty" id="empty">Service မတွေ့ပါ။ အခြားစကားလုံးနဲ့ ရှာကြည့်ပါ။</p>
-  </div>
-</section>
-
-<section id="how">
-  <div class="container">
-    <div class="section-head">
-      <h2>How It <span class="accent">Works</span></h2>
-      <p>ရိုးရှင်းတဲ့ အဆင့် ၃ ဆင့်နဲ့ စတင်လိုက်ပါ။</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <div class="number">01</div>
-        <h3>Choose</h3>
-        <p>မိမိလိုအပ်တဲ့ Service ကို ရွေးချယ်ပါ။</p>
-      </div>
-      <div class="step">
-        <div class="number">02</div>
-        <h3>Confirm</h3>
-        <p>ဈေးနှုန်း၊ ပမာဏ၊ ပေးပို့ချိန်နဲ့ စည်းကမ်းတွေကို အတည်ပြုပါ။</p>
-      </div>
-      <div class="step">
-        <div class="number">03</div>
-        <h3>Place Order</h3>
-        <p>Order အသေးစိတ်ကို Telegram ကနေ ပေးပို့ပြီး အတည်ပြုချက်ရယူပါ။</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="order">
-  <div class="container">
-    <div class="section-head">
-      <h2>Place Your <span class="accent">Order</span></h2>
-      <p>အချက်အလက်ဖြည့်ပြီး Telegram ကနေ မေးမြန်းနိုင်ပါတယ်။</p>
-    </div>
-
-    <div class="order-wrap">
-      <form id="orderForm">
-        <div class="field">
-          <label for="service">Select Service</label>
-          <select id="service" required>
-            <option value="">Choose a service</option>
-            <option>TikTok Services</option>
-            <option>Facebook Services</option>
-            <option>Instagram Services</option>
-            <option>YouTube Services</option>
-            <option>Video Engagement</option>
-            <option>Custom Service</option>
-          </select>
+    <!-- User Info Card -->
+    <div class="info-card">
+        <div class="icon">👤</div>
+        <div>
+            <div class="title">denova</div>
+            <div class="subtitle">Username ဖြစ်ပါသည်</div>
         </div>
+    </div>
 
-        <div class="field">
-          <label for="link">Profile / Post / Video Link</label>
-          <input id="link" type="url" placeholder="https://..." required>
+    <!-- Balance Card -->
+    <div class="info-card">
+        <div class="icon">💰</div>
+        <div>
+            <div class="title">K 0</div>
+            <div class="subtitle">လက်ကျန်ငွေ</div>
         </div>
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="quantity">Quantity</label>
-            <input id="quantity" type="number" min="1" step="1"
-              placeholder="ဥပမာ 100" required>
-          </div>
-          <div class="field">
-            <label for="price">Price per 1000 (MMK)</label>
-            <input id="price" type="number" min="0" step="any"
-              placeholder="Admin ထံမှ အတည်ပြုပါ" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="notes">Additional Notes (Optional)</label>
-          <textarea id="notes" rows="3" placeholder="လိုအပ်ချက်များ..."></textarea>
-        </div>
-
-        <div class="summary">
-          <div><span>Estimated Total</span><strong id="total">0 MMK</strong></div>
-          <small>ဈေးနှုန်းကို Admin ထံမှ အတည်ပြုပြီးမှ ငွေပေးချေပါ။</small>
-        </div>
-
-        <button class="btn btn-primary full" type="submit">
-          Send Order via Telegram ↗
-        </button>
-        <p class="note">
-          Order တင်ခြင်းသည် အလိုအလျောက် ဝန်ဆောင်မှုစတင်ခြင်း မဟုတ်ပါ။
-          Admin ရဲ့ အတည်ပြုချက်ကို စောင့်ပါ။
-        </p>
-        <p class="note" id="formMessage" role="status"></p>
-      </form>
     </div>
-  </div>
-</section>
 
-<section id="faq">
-  <div class="container">
-    <div class="section-head">
-      <h2>Frequently Asked <span class="accent">Questions</span></h2>
+    <!-- Platform Icons Grid (Exact Match with SocialBoostMm) -->
+    <div class="platform-grid">
+        <div class="platform-btn active" title="All" onclick="filterPlatform('all')">📊</div>
+        <div class="platform-btn" title="Telegram" onclick="filterPlatform('telegram')">✈️</div>
+        <div class="platform-btn" title="Facebook" onclick="filterPlatform('facebook')">📘</div>
+        <div class="platform-btn" title="TikTok" onclick="filterPlatform('tiktok')">🎵</div>
+        <div class="platform-btn" title="Instagram" onclick="filterPlatform('instagram')">📸</div>
+        <div class="platform-btn" title="YouTube" onclick="filterPlatform('youtube')">▶️</div>
     </div>
-    <div class="faq">
-      <details>
-        <summary>Order ဘယ်လိုတင်ရမလဲ?</summary>
-        <p>Service ကိုရွေး၊ လိုအပ်တဲ့ Link နဲ့ Quantity ဖြည့်ပြီး Telegram ကနေ ပေးပို့ပါ။ Admin အတည်ပြုချက်ရမှ Order ကို စတင်ပါ။</p>
-      </details>
-      <details>
-        <summary>ဈေးနှုန်းတွေ ဘယ်လိုသိနိုင်မလဲ?</summary>
-        <p>ဝန်ဆောင်မှုအလိုက် ဈေးနှုန်းနဲ့ ရရှိနိုင်မှုက ကွာခြားနိုင်ပါတယ်။ Order မတင်ခင် Admin ထံမှ လက်ရှိဈေးနှုန်းကို အတည်ပြုပါ။</p>
-      </details>
-      <details>
-        <summary>Order တင်ပြီး ဘယ်လောက်ကြာမလဲ?</summary>
-        <p>ဝန်ဆောင်မှုအမျိုးအစားနဲ့ Provider အလိုက် အချိန်ကွာခြားနိုင်ပါတယ်။ ခန့်မှန်းအချိန်ကို Order မတင်မီ မေးမြန်းပါ။</p>
-      </details>
-      <details>
-        <summary>အကူအညီလိုရင် ဘယ်လိုဆက်သွယ်မလဲ?</summary>
-        <p>အောက်ပါ Telegram Contact ကို အသုံးပြုပြီး မေးမြန်းနိုင်ပါတယ်။</p>
-      </details>
-    </div>
-  </div>
-</section>
-</main>
 
-<footer>
-  <div class="container footer-row">
-    <div>
-      <strong class="logo">DENO<span>VA.</span></strong>
-      <p>Social Media Services · Built for your next step.</p>
+    <!-- Order Form Box -->
+    <div class="form-box">
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="categorySelect">အမျိုးအစား (Category)</label>
+                <select id="categorySelect" onchange="filterServices()">
+                    <option value="tiktok">⭐ TikTok Services</option>
+                    <option value="telegram">✈️ Telegram Services</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="serviceSelect">Services</label>
+                <select id="serviceSelect" required onchange="updateServiceDetails()">
+                    <!-- TikTok Services -->
+                    <option value="1618" data-cat="tiktok" data-desc="📌 Service အသစ်ဖြစ်ပါသည်။<br>➢ Bot Quality ဖြစ်လို့ Likes ပေးတာတေကိုမမြင်ရပါဘူးဗျ<br>➢ ပြန်မကျသေးပါဘူးဗျ<br>➢ ရက် ၃၀ အတွင်း ပြန်ကျခဲ့ရင် ပြန်ဖြည့်/ ပြန်အမ်းပေးတဲ့ အာမခံ ရှိပါတယ်ဗျ" data-price="3000">🛡️ TikTok Likes - No Drop (ID: 1618)</option>
+                    <option value="1431" data-cat="tiktok" data-desc="⭐ TikTok Promote ကို 1 Day နဲ့ Run ပေးမည်ဖြစ်ပါသည်။<br>➢ TikTok Noti မှတဆင့် Approve လုပ်ပေးရပါမည်။<br>➢ လက်မခံပါက လိုက်ဆันဖြတ်ပါမည်။" data-price="6500">⭐ TikTok Promote | FYP ပေါ်တင် (ID: 1431)</option>
+                    <option value="1654" data-cat="tiktok" data-desc="⚡ TikTok Likes (Standard)<br>➢ အမြန်နှုန်းသင့်တင့်ပြီး သုံးစွဲရလွယ်ကူပါသည်။" data-price="2500">⚡ TikTok Likes (Standard - ID: 1654)</option>
+                    
+                    <!-- Telegram Services -->
+                    <option value="2001" data-cat="telegram" data-desc="✈️ Telegram Channel Members (High Quality)<br>➢ အကောင်းဆုံး အရည်အသွေးရှိ Member များ ထည့်သွင်းပေးသည်။" data-price="4000">✈️ Telegram Members | အကောင်းဆုံး (ID: 2001)</option>
+                </select>
+            </div>
+
+            <!-- Service Description Display -->
+            <div id="serviceDescBox" class="service-desc">
+                📌 Service အသစ်ဖြစ်ပါသည်။<br>
+                ➢ Bot Quality ဖြစ်လို့ Likes ပေးတာတေကိုမမြင်ရပါဘူးဗျ<br>
+                ➢ ပြန်မကျသေးပါဘူးဗျ<br>
+                ➢ ရက် ၃၀ အတွင်း ပြန်ကျခဲ့ရင် ပြန်ဖြည့်/ ပြန်အမ်းပေးတဲ့ အာမခံ ရှိပါတယ်ဗျ
+            </div>
+
+            <div class="form-group">
+                <label for="targetUrl">Link (Video / Channel Link)</label>
+                <input type="text" id="targetUrl" placeholder="https://vt.tiktok.com/... သို့မဟုတ် t.me/..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity (အရေအတွက်)</label>
+                <input type="number" id="quantity" placeholder="1000" min="100" value="1000" required oninput="calculateTotal()">
+            </div>
+
+            <!-- Charge Display -->
+            <div class="charge-box" id="chargeDisplay">
+                ကျသင့်ငွေ: K 3,000
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span>✈️ PLACE ORDER VIA TELEGRAM</span>
+            </button>
+        </form>
     </div>
-    <div>
-      <a id="footerTelegram" href="#order">Telegram Support ↗</a>
-      <p>© <span id="year"></span> Denova. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+</div>
 
 <script>
-// IMPORTANT: Replace this with your real Telegram username.
-// Example: https://t.me/yourusername
-const TELEGRAM_URL = "https://t.me/YOUR_TELEGRAM_USERNAME";
+    function filterPlatform(platform) {
+        const catSelect = document.getElementById('categorySelect');
+        if (platform === 'tiktok') {
+            catSelect.value = 'tiktok';
+            filterServices();
+        } else if (platform === 'telegram') {
+            catSelect.value = 'telegram';
+            filterServices();
+        }
+        
+        // Highlight active button
+        document.querySelectorAll('.platform-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
 
-const $ = id => document.getElementById(id);
+    function filterServices() {
+        const cat = document.getElementById('categorySelect').value;
+        const serviceSelect = document.getElementById('serviceSelect');
+        const options = serviceSelect.options;
 
-$("year").textContent = new Date().getFullYear();
-$("footerTelegram").href = TELEGRAM_URL;
+        let firstVisible = null;
+        for (let i = 0; i < options.length; i++) {
+            const opt = options[i];
+            if (opt.getAttribute('data-cat') === cat) {
+                opt.style.display = 'block';
+                if (!firstVisible) firstVisible = opt.value;
+            } else {
+                opt.style.display = 'none';
+            }
+        }
+        if (firstVisible) {
+            serviceSelect.value = firstVisible;
+            updateServiceDetails();
+        }
+    }
 
-function chooseService(name) {
-  $("service").value = name;
-  $("order").scrollIntoView({behavior:"smooth"});
-}
+    function updateServiceDetails() {
+        const select = document.getElementById('serviceSelect');
+        const selectedOption = select.options[select.selectedIndex];
+        
+        if (selectedOption && selectedOption.style.display !== 'none') {
+            document.getElementById('serviceDescBox').innerHTML = selectedOption.getAttribute('data-desc');
+            calculateTotal();
+        }
+    }
 
-document.querySelectorAll(".choose").forEach(button => {
-  button.addEventListener("click", () => {
-    chooseService(button.dataset.service);
-  });
-});
+    function calculateTotal() {
+        const select = document.getElementById('serviceSelect');
+        const selectedOption = select.options[select.selectedIndex];
+        if (!selectedOption) return;
+        
+        const basePrice = parseInt(selectedOption.getAttribute('data-price')) || 3000;
+        const quantity = parseInt(document.getElementById('quantity').value) || 1000;
+        
+        const total = Math.round((basePrice / 1000) * quantity);
+        document.getElementById('chargeDisplay').innerText = `ကျသင့်ငွေ: K ${total.toLocaleString()}`;
+    }
 
-function filterServices() {
-  const query = $("search").value.toLowerCase().trim();
-  const platform = $("platform").value;
-  let visible = 0;
+    // Initial run
+    filterServices();
 
-  document.querySelectorAll("#serviceGrid .card").forEach(card => {
-    const matchesText = card.innerText.toLowerCase().includes(query);
-    const matchesPlatform = platform === "all" ||
-      card.dataset.platform === platform;
-    const show = matchesText && matchesPlatform;
-    card.style.display = show ? "" : "none";
-    if (show) visible++;
-  });
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-  $("empty").style.display = visible ? "none" : "block";
-}
-$("search").addEventListener("input", filterServices);
-$("platform").addEventListener("change", filterServices);
+        const catSelect = document.getElementById('categorySelect');
+        const serviceSelect = document.getElementById('serviceSelect');
+        const category = catSelect.options[catSelect.selectedIndex].text;
+        const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+        const targetUrl = document.getElementById('targetUrl').value.trim();
+        const quantity = document.getElementById('quantity').value.trim();
+        const charge = document.getElementById('chargeDisplay').innerText;
+        const telegramUsername = "denova0"; // သင့် Telegram Username
 
-function updateTotal() {
-  const quantity = Number($("quantity").value);
-  const price = Number($("price").value);
-  const total = quantity * price / 1000;
-  $("total").textContent =
-    Number.isFinite(total) && total >= 0
-      ? Math.round(total).toLocaleString("en-US") + " MMK"
-      : "0 MMK";
-}
-$("quantity").addEventListener("input", updateTotal);
-$("price").addEventListener("input", updateTotal);
+        const message = `🔥 New DENOVA Order!%0A%0A📁 Category: ${category}%0A📦 Service: ${serviceName}%0A🔗 Link: ${targetUrl}%0A🔢 Quantity: ${quantity}%0A💰 ${charge}`;
+        const telegramUrl = `https://t.me/${telegramUsername}?text=${message}`;
 
-$("orderForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  if (TELEGRAM_URL.includes("YOUR_TELEGRAM_USERNAME")) {
-    $("formMessage").textContent =
-      "Telegram username ကို Code ထဲမှာ အရင်ထည့်ပေးပါ။";
-    return;
-  }
-
-  const service = $("service").value;
-  const link = $("link").value.trim();
-  const quantity = Number($("quantity").value);
-  const price = Number($("price").value);
-  const notes = $("notes").value.trim();
-
-  if (!service || !link || !Number.isInteger(quantity) ||
-      quantity < 1 || !Number.isFinite(price) || price < 0) {
-    $("formMessage").textContent =
-      "အချက်အလက်တွေကို မှန်ကန်စွာ ပြန်စစ်ပေးပါ။";
-    return;
-  }
-
-  const total = Math.round(quantity * price / 1000);
-  const message = [
-    "Hello Denova! I want to place an order.",
-    "",
-    "Service: " + service,
-    "Link: " + link,
-    "Quantity: " + quantity.toLocaleString("en-US"),
-    "Price per 1000: " + price.toLocaleString("en-US") + " MMK",
-    "Estimated total: " + total.toLocaleString("en-US") + " MMK",
-    "Notes: " + (notes || "None"),
-    "",
-    "Please confirm availability and final price."
-  ].join("\n");
-
-  const telegram = TELEGRAM_URL.replace(/\/+$/, "");
-  window.open(telegram + "?text=" + encodeURIComponent(message), "_blank");
-});
+        window.open(telegramUrl, '_blank');
+    });
 </script>
+
 </body>
 </html>
