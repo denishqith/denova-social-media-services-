@@ -3,231 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DENOVA SOCIAL MEDIA SERVICES</title>
+    <title>DENOVA - Social Media Services</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #2563eb;
-            --accent-hover: #1d4ed8;
-            --text-color: #f8fafc;
-            --sub-text: #94a3b8;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --accent-blue: #2563eb;
+            --border-color: #e2e8f0;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
         }
 
-        .container {
+        .main-container {
             width: 100%;
             max-width: 480px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+
+        /* User & Balance Cards */
+        .info-card {
             background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid #334155;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
         }
 
-        h1 {
-            text-align: center;
-            font-size: 1.6rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: #38bdf8;
+        .info-card .icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
         }
 
-        p.subtitle {
+        .info-card .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .info-card .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        /* Platform Grid Buttons */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .platform-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
-            color: var(--sub-text);
-            font-size: 0.9rem;
-            margin-bottom: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .platform-btn:hover, .platform-btn.active {
+            border-color: var(--accent-blue);
+            background-color: #eff6ff;
+        }
+
+        /* Order Form Box */
+        .form-box {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
             font-size: 0.85rem;
-            margin-bottom: 8px;
-            color: var(--sub-text);
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        select,
-        input[type="url"],
-        input[type="number"] {
+        select, input {
             width: 100%;
             padding: 12px;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            border: 1px solid #475569;
-            background-color: #0f172a;
-            color: var(--text-color);
             font-size: 1rem;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s;
+            background-color: #f8fafc;
         }
 
-        select:focus,
-        input:focus {
-            border-color: #38bdf8;
+        select:focus, input:focus {
+            border-color: var(--accent-blue);
+            background-color: #fff;
         }
 
-        .btn {
+        .submit-btn {
             width: 100%;
             padding: 14px;
+            background-color: var(--accent-blue);
+            color: white;
             border: none;
             border-radius: 8px;
-            background-color: var(--accent-color);
-            color: white;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s;
             margin-top: 10px;
+            transition: background-color 0.2s;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .btn:disabled {
-            background-color: #475569;
-            cursor: not-allowed;
-        }
-
-        #statusMessage {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .success {
-            background-color: #14532d;
-            color: #4ade80;
-            border: 1px solid #166534;
-        }
-
-        .error {
-            background-color: #450a0a;
-            color: #f87171;
-            border: 1px solid #991b1b;
+        .submit-btn:hover {
+            background-color: #1d4ed8;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>DENOVA SERVICES</h1>
-    <p class="subtitle">TikTok Automatic Services Panel</p>
+<div class="main-container">
+    <div class="header">DENOVA SERVICES</div>
 
-    <form id="orderForm">
-        <div class="form-group">
-            <label for="serviceSelect">Select Service</label>
-            <select id="serviceSelect" required>
-                <option value="1654">TikTok Likes (Standard - ID: 1654)</option>
-                <option value="1618">TikTok Likes - No Drop (ID: 1618)</option>
-                <option value="1431">TikTok Promote (ID: 1431)</option>
-            </select>
+    <!-- User Info Card -->
+    <div class="info-card">
+        <div class="icon">👤</div>
+        <div>
+            <div class="title">denova</div>
+            <div class="subtitle">Username ဖြစ်ပါသည်</div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="videoUrl">TikTok Video Link</label>
-            <input type="url" id="videoUrl" placeholder="https://vt.tiktok.com/..." required>
-        </div>
+    <!-- Platform Icons Grid -->
+    <div class="platform-grid">
+        <div class="platform-btn active">📊 All</div>
+        <div class="platform-btn">✈️ Telegram</div>
+        <div class="platform-btn">📘 Facebook</div>
+        <div class="platform-btn">🎵 TikTok</div>
+        <div class="platform-btn">📸 Instagram</div>
+        <div class="platform-btn">▶️ YouTube</div>
+    </div>
 
-        <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" placeholder="e.g. 1000" min="100" value="1000" required>
-        </div>
+    <!-- Order Form Box -->
+    <div class="form-box">
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="serviceSelect"> အမျိုးအစား (Service) </label>
+                <select id="serviceSelect" required>
+                    <option value="TikTok Promote (ID: 1431)">⭐ TikTok Promote | FYP ပေါ်တင် (ID: 1431)</option>
+                    <option value="TikTok Likes - No Drop (ID: 1618)">🛡️ TikTok Likes - No Drop (ID: 1618)</option>
+                    <option value="TikTok Likes Standard (ID: 1654)">⚡ TikTok Likes (Standard - ID: 1654)</option>
+                </select>
+            </div>
 
-        <button type="submit" id="submitBtn" class="btn">SUBMIT AUTOMATIC ORDER</button>
-    </form>
+            <div class="form-group">
+                <label for="videoUrl">TikTok Video Link</label>
+                <input type="url" id="videoUrl" placeholder="https://vt.tiktok.com/..." required>
+            </div>
 
-    <div id="statusMessage"></div>
+            <div class="form-group">
+                <label for="quantity">Quantity (အရေအတွက်)</label>
+                <input type="number" id="quantity" placeholder="1000" min="100" value="1000" required>
+            </div>
+
+            <button type="submit" class="submit-btn">PLACE ORDER VIA TELEGRAM</button>
+        </form>
+    </div>
 </div>
 
 <script>
-    // Proxy URL ကို သုံးပြီး Browser CORS Error ကို ကျော်လွှားခြင်း
-    const PROXY_URL = "https://corsproxy.io/?";
-    const TARGET_API = "https://socialboostmm.com/api/v2";
-    
-    // သင့်ရဲ့ SocialBoostMM API Key ကို အောက်ပါနေရာတွင် ထည့်ပေးပါ
-    const API_KEY = "YOUR_SOCIALBOOSTMM_API_KEY_HERE"; 
-
-    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const serviceId = document.getElementById('serviceSelect').value;
+        const service = document.getElementById('serviceSelect').value;
         const videoUrl = document.getElementById('videoUrl').value.trim();
         const quantity = document.getElementById('quantity').value.trim();
-        const submitBtn = document.getElementById('submitBtn');
-        const statusMessage = document.getElementById('statusMessage');
+        const telegramUsername = "denova0"; // သင့် Telegram Username
 
-        if (!videoUrl || !quantity) {
-            showStatus('ကျေးဇူးပြု၍ လင့်ခ်နှင့် အရေအတွက် အပြည့်အစုံ ဖြည့်ပါ', 'error');
-            return;
-        }
+        const message = `🔥 New DENOVA Order!%0A%0A📦 Service: ${service}%0A🔗 Link: ${videoUrl}%0A🔢 Quantity: ${quantity}`;
+        const telegramUrl = `https://t.me/${telegramUsername}?text=${message}`;
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Processing Order...";
-        statusMessage.style.display = 'none';
-
-        try {
-            const response = await fetch(PROXY_URL + encodeURIComponent(TARGET_API), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({
-                    'key': API_KEY,
-                    'action': 'add',
-                    'service': serviceId,
-                    'link': videoUrl,
-                    'quantity': quantity
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.order) {
-                showStatus(`✅ အော်ဒါ အောင်မြင်ပါသည်။ Order ID: ${data.order}`, 'success');
-                document.getElementById('videoUrl').value = '';
-            } else if (data.error) {
-                showStatus(`❌ မအောင်မြင်ပါ: ${data.error}`, 'error');
-            } else {
-                showStatus('❌ စနစ်ဆိုင်ရာ အမှားအယွင်း ရှိနေပါသည်', 'error');
-            }
-
-        } catch (error) {
-            console.error('Error:', error);
-            showStatus('❌ Server ချိတ်ဆက်မှု အဆင်မပြေပါ (အင်တာနက် သို့မဟုတ် API Key စစ်ဆေးပါ)', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerText = "SUBMIT AUTOMATIC ORDER";
-        }
+        window.open(telegramUrl, '_blank');
     });
-
-    function showStatus(text, type) {
-        const statusMessage = document.getElementById('statusMessage');
-        statusMessage.innerText = text;
-        statusMessage.className = type;
-        statusMessage.style.display = 'block';
-    }
 </script>
 
 </body>
