@@ -64,9 +64,9 @@
             letter-spacing: 0.5px;
         }
 
+        select,
         input[type="url"],
-        input[type="number"],
-        input[type="password"] {
+        input[type="number"] {
             width: 100%;
             padding: 12px;
             border-radius: 8px;
@@ -79,6 +79,7 @@
             transition: border-color 0.2s;
         }
 
+        select:focus,
         input:focus {
             border-color: #38bdf8;
         }
@@ -132,12 +133,17 @@
 
 <div class="container">
     <h1>DENOVA SERVICES</h1>
-    <p class="subtitle">TikTok Automatic Promotion Panel</p>
+    <p class="subtitle">TikTok Automatic Services Panel</p>
 
     <form id="orderForm">
+        <!-- Service Selection Dropdown -->
         <div class="form-group">
-            <label for="apiKey">API Key (Your SocialBoostMM Key)</label>
-            <input type="password" id="apiKey" placeholder="Paste your API key here" required>
+            <label for="serviceSelect">Select Service</label>
+            <select id="serviceSelect" required>
+                <option value="1654">TikTok Likes (Standard - ID: 1654)</option>
+                <option value="1618">TikTok Likes - No Drop (ID: 1618)</option>
+                <option value="1431">TikTok Promote (ID: 1431)</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -146,7 +152,7 @@
         </div>
 
         <div class="form-group">
-            <label for="quantity">Likes Quantity (Min: 100)</label>
+            <label for="quantity">Quantity</label>
             <input type="number" id="quantity" placeholder="e.g. 1000" min="100" value="1000" required>
         </div>
 
@@ -157,19 +163,21 @@
 </div>
 
 <script>
-    const SERVICE_ID = "1654"; // TikTok Likes Service ID
+    // System Configurations (Customer တွေ API Key ထည့်စရာမလိုဘဲ ဤနေရာတွင် တစ်ခါတည်း ချိတ်ပေးထားပါသည်)
+    const API_URL = "https://socialboostmm.com/api/v2";
+    const API_KEY = "YOUR_SOCIALBOOSTMM_API_KEY_HERE"; // <--- သင့်ရဲ့ socialboostmm.com API Key ကို ဤနေရာတွင် ထည့်ပါ
 
     document.getElementById('orderForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const apiKey = document.getElementById('apiKey').value.trim();
+        const serviceId = document.getElementById('serviceSelect').value;
         const videoUrl = document.getElementById('videoUrl').value.trim();
         const quantity = document.getElementById('quantity').value.trim();
         const submitBtn = document.getElementById('submitBtn');
         const statusMessage = document.getElementById('statusMessage');
 
-        if (!apiKey || !videoUrl || !quantity) {
-            showStatus('ကျေးဇူးပြု၍ အချက်အလက်များ အကုန်ဖြည့်ပါ', 'error');
+        if (!videoUrl || !quantity) {
+            showStatus('ကျေးဇူးပြု၍ လင့်ခ်နှင့် အရေအတွက် အပြည့်အစုံ ဖြည့်ပါ', 'error');
             return;
         }
 
@@ -180,15 +188,15 @@
 
         try {
             // Send request to SocialBoostMM API
-            const response = await fetch('https://socialboostmm.com/api/v2', {
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
-                    'key': apiKey,
+                    'key': API_KEY,
                     'action': 'add',
-                    'service': SERVICE_ID,
+                    'service': serviceId,
                     'link': videoUrl,
                     'quantity': quantity
                 })
