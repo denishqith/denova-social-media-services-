@@ -102,6 +102,11 @@
             background-color: var(--accent-hover);
         }
 
+        .btn:disabled {
+            background-color: #475569;
+            cursor: not-allowed;
+        }
+
         #statusMessage {
             margin-top: 15px;
             padding: 12px;
@@ -116,6 +121,12 @@
             color: #4ade80;
             border: 1px solid #166534;
         }
+
+        .error {
+            background-color: #450a0a;
+            color: #f87171;
+            border: 1px solid #991b1b;
+        }
     </style>
 </head>
 <body>
@@ -128,9 +139,9 @@
         <div class="form-group">
             <label for="serviceSelect">Select Service</label>
             <select id="serviceSelect" required>
-                <option value="TikTok Likes (Standard - ID: 1654)">TikTok Likes (Standard - ID: 1654)</option>
-                <option value="TikTok Likes - No Drop (ID: 1618)">TikTok Likes - No Drop (ID: 1618)</option>
-                <option value="TikTok Promote (ID: 1431)">TikTok Promote (ID: 1431)</option>
+                <option value="1654">TikTok Likes (Standard - ID: 1654)</option>
+                <option value="1618">TikTok Likes - No Drop (ID: 1618)</option>
+                <option value="1431">TikTok Promote (ID: 1431)</option>
             </select>
         </div>
 
@@ -144,34 +155,79 @@
             <input type="number" id="quantity" placeholder="e.g. 1000" min="100" value="1000" required>
         </div>
 
-        <button type="submit" class="btn">PLACE ORDER VIA TELEGRAM</button>
+        <button type="submit" id="submitBtn" class="btn">SUBMIT AUTOMATIC ORDER</button>
     </form>
 
-    <div id="statusMessage" class="success" style="display: block;">
-        ℹ️ အော်ဒါတင်လိုက်သည်နှင့် သင့်ထံသို့ Telegram မှတဆင့် တိုက်ရိုက်ရောက်ရှိမည်။
-    </div>
+    <div id="statusMessage"></div>
 </div>
 
 <script>
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
+    // Proxy URL ကို သုံးပြီး Browser CORS Error ကို ကျော်လွှားခြင်း
+    const PROXY_URL = "https://corsproxy.io/?";
+    const TARGET_API = "https://socialboostmm.com/api/v2";
+    
+    // သင့်ရဲ့ SocialBoostMM API Key ကို အောက်ပါနေရာတွင် ထည့်ပေးပါ
+    const API_KEY = "YOUR_SOCIALBOOSTMM_API_KEY_HERE"; 
+
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const service = document.getElementById('serviceSelect').value;
+        const serviceId = document.getElementById('serviceSelect').value;
         const videoUrl = document.getElementById('videoUrl').value.trim();
         const quantity = document.getElementById('quantity').value.trim();
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMessage = document.getElementById('statusMessage');
 
-        // သင့်ရဲ့ Telegram Username (သို့) Chat ID 
-        // ဥပမာ - denova0
-        const telegramUsername = "denova0"; 
+        if (!videoUrl || !quantity) {
+            showStatus('ကျေးဇူးပြု၍ လင့်ခ်နှင့် အရေအတွက် အပြည့်အစုံ ဖြည့်ပါ', 'error');
+            return;
+        }
 
-        // ပို့မည့် စာသားဖော်မတ်
-        const message = `🔥 New DENOVA Order!%0A%0A📦 Service: ${service}%0A🔗 Link: ${videoUrl}%0A🔢 Quantity: ${quantity}`;
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Processing Order...";
+        statusMessage.style.display = 'none';
 
-        // Telegram သို့ တိုက်ရိုက်လင့်ခ်ဖွင့်ရန်
-        const telegramUrl = `https://t.me/${telegramUsername}?text=${message}`;
+        try {
+            const response = await fetch(PROXY_URL + encodeURIComponent(TARGET_API), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'key': API_KEY,
+                    'action': 'add',
+                    'service': serviceId,
+                    'link': videoUrl,
+                    'quantity': quantity
+                })
+            });
 
-        window.open(telegramUrl, '_blank');
+            const data = await response.json();
+
+            if (data.order) {
+                showStatus(`✅ အော်ဒါ အောင်မြင်ပါသည်။ Order ID: ${data.order}`, 'success');
+                document.getElementById('videoUrl').value = '';
+            } else if (data.error) {
+                showStatus(`❌ မအောင်မြင်ပါ: ${data.error}`, 'error');
+            } else {
+                showStatus('❌ စနစ်ဆိုင်ရာ အမှားအယွင်း ရှိနေပါသည်', 'error');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            showStatus('❌ Server ချိတ်ဆက်မှု အဆင်မပြေပါ (အင်တာနက် သို့မဟုတ် API Key စစ်ဆေးပါ)', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "SUBMIT AUTOMATIC ORDER";
+        }
     });
+
+    function showStatus(text, type) {
+        const statusMessage = document.getElementById('statusMessage');
+        statusMessage.innerText = text;
+        statusMessage.className = type;
+        statusMessage.style.display = 'block';
+    }
 </script>
 
 </body>
