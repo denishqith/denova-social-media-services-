@@ -312,7 +312,7 @@
             </div>
 
             <button type="submit" class="submit-btn">
-                <span>PLACE ORDER VIA TELEGRAM</span>
+                <span>SUBMIT ORDER (API)</span>
             </button>
         </form>
     </div>
@@ -376,22 +376,49 @@
     // Initial run
     filterServices();
 
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
+    // Vercel API Order Submission Integration
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const catSelect = document.getElementById('categorySelect');
-        const serviceSelect = document.getElementById('serviceSelect');
-        const category = catSelect.options[catSelect.selectedIndex].text;
-        const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+        const serviceId = document.getElementById('serviceSelect').value;
         const targetUrl = document.getElementById('targetUrl').value.trim();
         const quantity = document.getElementById('quantity').value.trim();
-        const charge = document.getElementById('chargeDisplay').innerText;
-        const telegramUsername = "denova0"; 
 
-        const message = `🔥 New ZARIA Order!%0A%0A📁 Category: ${category}%0A📦 Service: ${serviceName}%0A🔗 Link: ${targetUrl}%0A🔢 Quantity: ${quantity}%0A💰 ${charge}`;
-        const telegramUrl = `https://t.me/${telegramUsername}?text=${message}`;
+        const orderData = {
+            service: serviceId,
+            link: targetUrl,
+            quantity: quantity
+        };
 
-        window.open(telegramUrl, '_blank');
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Submitting Order...';
+
+        try {
+            const response = await fetch('/api/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('အော်ဒါတင်ခြင်း အောင်မြင်ပါသည်! Order ID: ' + (result.order || 'Success'));
+                document.getElementById('orderForm').reset();
+                filterServices();
+            } else {
+                alert('အော်ဒါတင်၍ မရပါ: ' + (result.error || 'Unknown error'));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('ချိတ်ဆက်မှု အမှားအယွင်း ရှိနေပါသည်။');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'SUBMIT ORDER (API)';
+        }
     });
 </script>
 
